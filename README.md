@@ -38,3 +38,4 @@ Para clonar o repositório, rode o seguinte comando.
  - [Eslint](https://eslint.org/docs/latest/use/getting-started)
  - [Tailwind](https://tailwindcss.com/)
  - [Typescript](https://www.typescriptlang.org/)
+ 
