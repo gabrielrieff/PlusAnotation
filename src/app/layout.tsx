@@ -1,8 +1,11 @@
-import './globals.css';
+import { Provider } from '~/components/Provider/Provider';
+import { Header } from '~/components/Header';
 import type { Metadata } from 'next';
 
+import './globals.css';
+
 export const metadata: Metadata = {
-  title: 'Templete Next App'
+  title: 'Plus+'
 };
 
 export default function RootLayout({
@@ -12,7 +15,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR">
-      <body className="h-screen bg-zinc-200">{children}</body>
+      <body className="h-screen">
+        <Provider>
+          <Header />
+          {children}
+        </Provider>
+      </body>
     </html>
   );
 }
