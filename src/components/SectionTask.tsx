@@ -8,11 +8,14 @@ import {
   query,
   orderBy,
   where,
-  onSnapshot
+  onSnapshot,
+  doc,
+  deleteDoc
 } from 'firebase/firestore';
 
 import { FaTrash } from 'react-icons/fa';
 import { FiShare2 } from 'react-icons/fi';
+import Link from 'next/link';
 
 interface sectionTaskProps {
   user: string
@@ -58,6 +61,19 @@ export const SectionTask = (props: sectionTaskProps) => {
     loadingTask()
   }, [props.user]);
 
+  async function handleShare(id: string){
+    await navigator.clipboard.writeText(
+      `${process.env.NEXT_PUBLIC_URL}/task/${id}`
+    )
+  }
+
+  async function handleDeletTash(id: string){
+    const docRef = doc(db, 'task', id);
+
+    await deleteDoc(docRef);
+
+  }
+
   return (
     <section className="mt-9 px-5 w-full flex flex-col items-center">
       <div className="w-full max-w-[1024px]">
@@ -75,7 +91,7 @@ export const SectionTask = (props: sectionTaskProps) => {
                   <label className="bg-[#3183ff] px-[4px] py-[6px] rounded-md text-white">
                     publico
                   </label>
-                  <button className="cursor-pointer">
+                  <button className="cursor-pointer" onClick={() => handleShare(task.id)}>
                     <FiShare2 size="22" color="#3183ff" />
                   </button>
                 </div>
@@ -83,10 +99,16 @@ export const SectionTask = (props: sectionTaskProps) => {
               )}
               
               <div className="flex items-center justify-between w-full">
-                <p className="whitespace-pre-wrap">
-                  {task.task}
-                </p>
-                <button className="hover:scale-[1.05] duration-[.2s]">
+                {task.public ?(
+                  <Link href={`/task/${task.id}`}>
+                    <p className="whitespace-pre-wrap">
+                      {task.task}
+                    </p>
+                  </Link>
+                ) : (
+                  <p>{task.task}</p>
+                )}
+                <button className="hover:scale-[1.05] duration-[.2s]" onClick={() => handleDeletTash(task.id)}>
                   <FaTrash size="24" color="#ea3140" />
                 </button>
               </div>
