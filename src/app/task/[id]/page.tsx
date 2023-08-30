@@ -1,15 +1,12 @@
 
 import { db } from "~/services/firebaseConnection";
 import {
-  collection,
-  query,
-  orderBy,
-  where,
-  onSnapshot,
   doc,
   getDoc
 } from 'firebase/firestore';
 import { redirect } from "next/navigation";
+import { SessionComment } from "~/components/SessionComment";
+import { SessionSearchComments } from "~/components/SessionSearchComments";
 
 interface taskProps{
   params: {id: string};
@@ -44,7 +41,8 @@ export default async function task({params}: taskProps) {
   }
 
   return (
-    <div className="w-full max-w-[1024px] mt-10 mr-auto mb-0 ml-auto flex flex-col justify-center items-center">
+    <div className="w-full max-w-[1024px] mt-10 mr-auto mb-0 ml-auto
+    flex flex-col justify-center items-center">
       <main className="w-full p-4">
         <h1 className="font-bold text-[32px] mb-4">Tarefa</h1>
         <article className="border-solid border-[1px] border-gray-600 p-4
@@ -52,6 +50,10 @@ export default async function task({params}: taskProps) {
           <p className="whitespace-pre-wrap w-full">{item.tarefa}</p>
         </article>
       </main>
+
+      <SessionComment id={id}/>
+
+      <SessionSearchComments id={id}/>
     </div>
   );
 }

@@ -12,7 +12,7 @@ export function Header() {
       <section className="p-4 w-full max-w-[1024px] flex items-center justify-between">
         <nav className="flex items-center">
           <Link href={''} className="text-[24px] font-bold">
-            <h1>Tarefa+</h1>
+            <h1>Plus Anotation+</h1>
           </Link>
           {session?.user && (
             <Link
@@ -30,8 +30,7 @@ export function Header() {
           <>
             <button
               className="py-1 px-3 rounded-3xl border border-white border-solid duration-[0.4s]
-              cursor-pointer hover:scale-[1.08] hover:bg-white hover:text-black hover:font-bold
-              flex items-center justify-around gap-5"
+              cursor-pointer hover:bg-white hover:text-black flex items-center justify-around gap-5"
               onClick={() => signOut()}
             >
               Olá {session?.user?.name}

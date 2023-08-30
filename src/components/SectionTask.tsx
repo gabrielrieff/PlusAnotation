@@ -67,7 +67,7 @@ export const SectionTask = (props: sectionTaskProps) => {
     )
   }
 
-  async function handleDeletTash(id: string){
+  async function handleDeletTask(id: string){
     const docRef = doc(db, 'task', id);
 
     await deleteDoc(docRef);
@@ -85,7 +85,8 @@ export const SectionTask = (props: sectionTaskProps) => {
           tasks.map((task) => (
             <article 
               key={task.id}
-              className="mb-4 leading-[150%] flex flex-col items-start border-solid border-[1px] border-gray-600 rounded-md p-2">
+              className="mb-4 leading-[150%] flex flex-col items-start border-solid
+              border-[1px] border-gray-600 rounded-md p-2">
               {task.public &&(
                 <div className="flex items-center justify-center gap-3 mb-2">
                   <label className="bg-[#3183ff] px-[4px] py-[6px] rounded-md text-white">
@@ -108,7 +109,7 @@ export const SectionTask = (props: sectionTaskProps) => {
                 ) : (
                   <p>{task.task}</p>
                 )}
-                <button className="hover:scale-[1.05] duration-[.2s]" onClick={() => handleDeletTash(task.id)}>
+                <button className="hover:scale-[1.05] duration-[.2s]" onClick={() => handleDeletTask(task.id)}>
                   <FaTrash size="24" color="#ea3140" />
                 </button>
               </div>
